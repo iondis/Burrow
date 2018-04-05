@@ -17,8 +17,8 @@ servers=[ "realtime-zk-0.realtime-zookeeper.crix:2181", "realtime-zk-0.realtime-
 timeout=6
 root-path="/burrow"
 
-[client-profile.test]
-client-id="burrow-test"
+[client-profile.staging]
+client-id="burrow-staging"
 kafka-version="1.0.0"
 
 [cluster.staging]
@@ -37,4 +37,4 @@ group-blacklist="^(console-consumer-|python-kafka-consumer-|quick-).*$"
 group-whitelist=""
 
 [httpserver.default]
-address=":8000"
+address=":8080"

@@ -1,29 +1,35 @@
 [zookeeper]
-servers=[ "zookeeper:2181" ]
+servers=[ "realtime-zk-0.realtime-zookeeper.crix:2181", "realtime-zk-0.realtime-zookeeper.crix:2181", "realtime-zk-0.realtime-zookeeper.crix:2181" ]
 timeout=6
 root-path="/burrow"
 
-[cluster.local]
+[cluster.staging]
 class-name="kafka"
-servers=[ "kafka:9092" ]
+servers=[ "realtime-kafka-0.broker.crix:9092", "realtime-kafka-1.broker.crix:9092", "realtime-kafka-2.broker.crix:9092" ]
 topic-refresh=60
 offset-refresh=30
 
-[consumer.local]
+[consumer.staging]
 class-name="kafka"
-cluster="local"
-servers=[ "kafka:9092" ]
+cluster="staging"
+servers=[ "realtime-kafka-0.broker.crix:9092", "realtime-kafka-1.broker.crix:9092", "realtime-kafka-2.broker.crix:9092" ]
 group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"
 group-whitelist=""
 
-[consumer.local_zk]
+[consumer.staging_zk]
 class-name="kafka_zk"
-cluster="local"
-servers=[ "zookeeper:2181" ]
-zookeeper-path="/local"
+cluster="staging"
+servers=[ "realtime-zk-0.realtime-zookeeper.crix:2181", "realtime-zk-0.realtime-zookeeper.crix:2181", "realtime-zk-0.realtime-zookeeper.crix:2181" ]
+zookeeper-path="/zookeeper"
 zookeeper-timeout=30
 group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"
 group-whitelist=""
 
+[client-profile.staging]
+client-id="burrow-staging"
+kafka-version="1.0.0"
+
 [httpserver.default]
-address=":8000"
+address=":8080"
+
+
